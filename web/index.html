@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Submit Form</title>
+    <script>
+        function submitForm() {
+            const name = document.getElementById("name").value;
+            const address = document.getElementById("address").value;
+            const age = document.getElementById("age").value;
+
+            const data = {
+                name: name,
+                address: address,
+                age: age
+            };
+
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Form submitted successfully!');
+                } else {
+                    alert('Error submitting form!');
+                }
+            })
+            .catch(error => {
+                alert('Error submitting form: ' + error.message);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Submit Form</h1>
+    <form>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address"><br><br>
+
+        <label for="age">Age:</label><br>
+        <input type="text" id="age" name="age"><br><br>
+
+        <input type="button" value="Submit" onclick="submitForm()">
+    </form>
+</body>
+</html>
