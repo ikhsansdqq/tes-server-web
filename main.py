@@ -12,6 +12,8 @@ while True:
     req = client_connection.recv(1024).decode()
     print(req)
 
+    # ADA EMBUL
+
     headers = req.split('\n')
     method, filename, _ = headers[0].split()
 
