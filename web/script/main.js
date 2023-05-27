@@ -10,6 +10,21 @@ if (localStorage.getItem('catData')) {
     catData = JSON.parse(localStorage.getItem('catData'));
     displayCatList();
 }
+const searchForm = document.querySelector('.form-inline');
+const searchInput = document.querySelector('.form-control');
+
+searchForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent form submission
+
+    const searchText = searchInput.value.toLowerCase();
+    const filteredCats = catData.filter(function (cat) {
+        return cat.name.toLowerCase().includes(searchText);
+    });
+    displayCatList(filteredCats);
+
+    searchInput.blur(); // Remove focus from the search input field
+});
+
 
 const submitButton = document.querySelector('button.btn-primary');
 submitButton.addEventListener('click', function (event) {
@@ -40,12 +55,18 @@ submitButton.addEventListener('click', function (event) {
     catBreedInput.value = '';
     msg.textContent = ''; // Clear error message
 
-    displayCat(newCat);
+    displayCatList()
+    // displayCat(newCat);
 });
 
 function saveCatDataToLocalStorage() {
-    localStorage.setItem('catData', JSON.stringify(catData));
+    const filteredCats = searchBox.value ? catData.filter(function (cat) {
+        return cat.name.toLowerCase().includes(searchBox.value.toLowerCase());
+    }) : null;
+
+    localStorage.setItem('catData', JSON.stringify(filteredCats || catData));
 }
+
 
 function displayCat(cat) {
     const catElement = document.createElement('div');
@@ -85,14 +106,28 @@ function displayCat(cat) {
     shownCat.appendChild(catElement);
 }
 
-function displayCatList() {
+function displayCatList(filteredCats) {
     const shownCat = document.getElementById('shownCat');
     shownCat.innerHTML = ''; // Clear existing cat list
 
-    catData.forEach(function (cat) {
+    const catsToDisplay = filteredCats || catData;
+
+    catsToDisplay.forEach(function (cat) {
         displayCat(cat);
     });
+
+    const displayFilter = document.getElementById('displayFilter');
+    const searchResultCount = document.getElementById('searchResultCount');
+    const searchText = searchInput.value;
+    if (searchText) {
+        displayFilter.textContent = 'Display search filter for: ' + searchText;
+        searchResultCount.textContent = 'Search results: ' + catsToDisplay.length;
+    } else {
+        displayFilter.textContent = '';
+        searchResultCount.textContent = '';
+    }
 }
+
 
 function editCat(cat) {
     const updatedName = prompt('Enter the updated cat name:', cat.name);

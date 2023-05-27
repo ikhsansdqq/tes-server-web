@@ -32,7 +32,7 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchBox">Search</button>
             </form>
         </div>
     </nav>
@@ -73,7 +73,10 @@
         </div>
         <div class="right">
             <h3 style="font-family: 'Montserrat', sans-serif; font-weight: bold; margin-bottom: 24px;">Cat List</h3>
-            <div id="shownCat">
+            <small id="displayFilter" class="form-text text-muted"></small>
+            <span id="searchResultCount"></span>
+
+            <div id="shownCat" style="margin-top: 24px">
                 <div id="msg" style="color: red"></div>
             </div>
         </div>
