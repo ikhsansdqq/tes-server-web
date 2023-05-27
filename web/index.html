@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Landing Page Cat Data</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
@@ -29,10 +29,6 @@
             margin-top: 52px;
             padding: 0;
             max-width: 100%;
-        }
-
-        #posts {
-            width: 400px;
         }
 
         #posts div {
@@ -81,11 +77,6 @@
             cursor: pointer;
         }
 
-        /*.cat-item:hover {*/
-        /*    box-shadow: 0 4px 8px rgba(225, 225, 225, 0.2);*/
-        /*    transition: 0.2s ease-in;*/
-        /*}*/
-
         .cat-item p {
             margin-bottom: 0;
             display: inline-block;
@@ -97,31 +88,18 @@
 <!-- navbar -->
 <div class="wrapper">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="#">Hidden brand</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
@@ -133,21 +111,28 @@
             </form>
         </div>
     </nav>
-
     <div class="container">
         <div class="left">
             <h3 style="font-family: 'Montserrat', sans-serif; font-weight: bold; margin-bottom: 24px;">Cat Form</h3>
             <div class="text-left">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Cat Name" aria-label="cat-name">
+                <div class="form-group">
+                    <label for="cat-name">Cat Name</label>
+                    <input id="cat-name" type="text" class="form-control" placeholder="Cat Name"
+                           aria-label="cat-name" style="max-width: 100%;">
+                    <small id="emailHelp" class="form-text text-muted">Please provide your cat name.</small>
                 </div>
 
-                <div class="input-group mb-3">
-                    <input type="number" class="form-control" placeholder="Cat Age (in month)" aria-label="cat-age">
+                <div class="form-group">
+                    <label for="cat-age">Cat
+                        Age</label>
+                    <input id="cat-age" type="number" class="form-control" min="1" placeholder="Cat Age"
+                           aria-label="cat-age">
+                    <small class="form-text text-muted">Please provide your cat age in <strong>month.</strong></small>
                 </div>
 
-                <div class="input-group mb-3">
-                    <select class="form-control" aria-label="cat-breeds">
+                <div class="form-group">
+                    <label for="cat-breeds">Cat Breed</label>
+                    <select id="cat-breeds" class="form-control" aria-label="cat-breeds">
                         <option value="" selected disabled>Select a breed</option>
                         <option value="Bengal">Bengal</option>
                         <option value="Siamese">Siamese</option>
@@ -155,11 +140,10 @@
                     </select>
                 </div>
 
-                <!--                <div class="input-group mb-3">-->
-                <!--                    <input type="text" class="form-control" placeholder="Cat Breeds" aria-label="cat-breeds">-->
-                <!--                </div>-->
-
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="btn-grouping" style="display: flex; gap: 12px">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-outline-primary" id="clearCookies">Clear Cookies</button>
+                </div>
             </div>
         </div>
         <div class="right">
@@ -168,7 +152,6 @@
                 <div id="msg" style="color: red"></div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -226,12 +209,16 @@
         const catElement = document.createElement('div');
         catElement.classList.add('cat-item');
 
-        const catNameElement = document.createElement('h3');
+        const catNameElement = document.createElement('h4');
         catNameElement.textContent = cat.name;
         catElement.appendChild(catNameElement);
 
         const catAgeElement = document.createElement('p');
-        catAgeElement.textContent = `${cat.breed} - ${cat.age} months old`;
+        if (cat.age > 1) {
+            catAgeElement.textContent = `${cat.breed} - ${cat.age} months old`;
+        } else {
+            catAgeElement.textContent = `${cat.breed} - ${cat.age} month old`;
+        }
         catElement.appendChild(catAgeElement);
 
         const editIcon = document.createElement('i');
@@ -282,34 +269,6 @@
         }
     }
 
-    function updateCat() {
-        const updatedName = document.getElementById('editCatName').value;
-        const updatedAge = document.getElementById('editCatAge').value;
-        const updatedBreed = document.getElementById('editCatBreed').value;
-
-        if (updatedName && updatedAge && updatedBreed) {
-            const cat = {
-                name: updatedName,
-                age: updatedAge,
-                breed: updatedBreed
-            };
-
-            // Find the cat in the catData array and update its values
-            const index = catData.indexOf(cat);
-            if (index > -1) {
-                catData[index] = cat;
-                saveCatDataToLocalStorage(); // Save cat data to local storage
-                displayCatList();
-            }
-
-            // Hide the modal
-            $('#editCatModal').modal('hide');
-        } else {
-            // Display tooltip indicating null data
-            msg.textContent = 'Please fill in all fields';
-        }
-    }
-
     function deleteCat(cat) {
         const index = catData.indexOf(cat);
         if (index > -1) {
@@ -319,6 +278,26 @@
         }
     }
 
+    function deleteCatData() {
+        deleteCookie('catData');
+        localStorage.removeItem('catData');
+    }
+
+    function deleteCookie(cookieName) {
+        document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    }
+
+    // Usage: Call deleteCatData() when the "Clear Cookie" button is clicked.
+    const clearCookiesButton = document.getElementById('clearCookies');
+    clearCookiesButton.addEventListener('click', function () {
+        // Remove the catData cookie
+        document.cookie = 'catData=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        // Clear the catData records
+        deleteCatData()
+        catData = [];
+        // Clear the displayed cat list
+        displayCatList();
+    });
 
 </script>
 </body>
