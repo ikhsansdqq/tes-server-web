@@ -1,62 +1,43 @@
-import os.path
 import socket
 
-host = "localhost"
-port = 8080
+server_host = 'localhost'
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind((host, port))
-server_socket.listen(1)
-print("listening on port %s" % port)
 
 while True:
-    client_connection, client_addr = server_socket.accept()
-    req = client_connection.recv(1024).decode()
-    print(req)
+    client_port_input = input("Please input a port number (ex: 8080): ")
 
-    headers = req.split('\n')
-    method, filename, _ = headers[0].split()
+    try:
+        server_port = int(client_port_input)
+        if len(str(server_port)) != 4:
+            raise ValueError("Invalid port number. Please enter a 4-digit number.")
+        server_socket.bind((server_host, server_port))
+        server_socket.listen(1)
+        print(f"Ready to listen at port: {server_port}")
+        while True:
+            client_connection, client_address = server_socket.accept()
+            client_request = client_connection.recv(1024).decode()
+            print(f'This is client request: {client_request}')
 
-    if filename == '/':
-        filename = '/index.html'
+            server_header = client_request.split('\n')
+            method, filename, _ = server_header[0].split()
 
-    if method == 'GET':
-        try:
-            if filename == '/download':
-                file_path = 'download/example.txt'
-                if os.path.isfile(file_path):
-                    with open(file_path, 'rb') as f:
-                        content = f.read()
-                    response = "HTTP/1.1 200 OK\r\n\r\n"
-                    client_connection.sendall(response.encode())
-                    client_connection.sendall(content)
-                else:
-                    response = "HTTP/1.1 404 NOT FOUND\r\n\r\n" + "<h1>404 NOT FOUND</h1>"
-                    client_connection.sendall(response.encode())
-            else:
+            if filename == "/":
+                filename = "/index.html"
+            elif filename == "/info":
+                filename = "/ipsum.html"
+
+            try:
                 fin = open('web' + filename)
                 content = fin.read()
-                fin.close()
-                response = "HTTP/1.1 200 OK\r\n\r\n" + content
+                response = 'HTTP/1.1 200 OK\r\n\r\n' + content
                 client_connection.sendall(response.encode())
-        except FileNotFoundError:
-            try:
+                print('HTTP/1.1 200 OK\r\n')
+            except FileNotFoundError:
                 fin = open('web/404.html')
                 content = fin.read()
-                fin.close()
-                response = "HTTP/1.1 404 NOT FOUND\r\n\r\n" + content
+                response = 'HTTP/1.1 404 NOT FOUND\r\n\r\n' + content
                 client_connection.sendall(response.encode())
-            except FileNotFoundError:
-                response = "HTTP/1.1 404 NOT FOUND\r\n\r\n" + "<h1>404 Not Found</h1>"
-                client_connection.sendall(response.encode())
-    elif method == 'POST' and filename == '/submit':
-        data = req.split('\r\n\r\n', 1)[1]
-        print("POST data:", data)
-        response = "HTTP/1.1 200 OK\r\n\r\n" + "<h1>POST request processed</h1>"
-        client_connection.sendall(response.encode())
-    else:
-        response = "HTTP/1.1 404 NOT FOUND\r\n\r\n" + "<h4>NOT FOUND</h4>"
-        client_connection.sendall(response.encode())
-
-    client_connection.close()
-
-server_socket.close()
+                print('HTTP/1.1 404 Not Found\r\n')
+            client_connection.close()
+    except ValueError as e:
+        print("Error:", str(e))

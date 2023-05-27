@@ -1,53 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Submit Form</title>
-    <script>
-        function submitForm() {
-            const name = document.getElementById("name").value;
-            const address = document.getElementById("address").value;
-            const age = document.getElementById("age").value;
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
-            const data = {
-                name: name,
-                address: address,
-                age: age
-            };
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-            fetch('/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('Form submitted successfully!');
-                } else {
-                    alert('Error submitting form!');
-                }
-            })
-            .catch(error => {
-                alert('Error submitting form: ' + error.message);
-            });
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
         }
-    </script>
+
+        body {
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            gap: 72px;
+            justify-content: space-around;
+            margin-top: 52px;
+            padding: 0;
+            max-width: 100%;
+        }
+
+        #posts {
+            width: 400px;
+        }
+
+        #posts div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #msg {
+            color: red;
+        }
+
+        .bg-light {
+            padding: 16px 32px;
+            border-radius: 0 0 8px 8px;
+        }
+
+        i {
+            cursor: pointer;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            /*background-color: lightgrey;*/
+        }
+
+        .left {
+            width: 100%;
+            /*background-color: aliceblue;*/
+        }
+
+        .right {
+            width: 100%;
+            /*background-color: antiquewhite;*/
+        }
+
+        .cat-item {
+            margin-bottom: 24px;
+            padding: 18px 28px;
+            border: 1px solid #f3f3f3;
+            border-radius: 8px;
+            max-width: 100%;
+            transition: 0.15s ease-in-out;
+            cursor: pointer;
+        }
+
+        /*.cat-item:hover {*/
+        /*    box-shadow: 0 4px 8px rgba(225, 225, 225, 0.2);*/
+        /*    transition: 0.2s ease-in;*/
+        /*}*/
+
+        .cat-item p {
+            margin-bottom: 0;
+            display: inline-block;
+            margin-right: 24px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Submit Form</h1>
-    <form>
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name"><br><br>
+<!-- navbar -->
+<div class="wrapper">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <label for="address">Address:</label><br>
-        <input type="text" id="address" name="address"><br><br>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
 
-        <label for="age">Age:</label><br>
-        <input type="text" id="age" name="age"><br><br>
+    <div class="container">
+        <div class="left">
+            <h3 style="font-family: 'Montserrat', sans-serif; font-weight: bold; margin-bottom: 24px;">Cat Form</h3>
+            <div class="text-left">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Cat Name" aria-label="cat-name">
+                </div>
 
-        <input type="button" value="Submit" onclick="submitForm()">
-        <a href="/download" download>Get File</a>
-    </form>
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" placeholder="Cat Age (in month)" aria-label="cat-age">
+                </div>
+
+                <div class="input-group mb-3">
+                    <select class="form-control" aria-label="cat-breeds">
+                        <option value="" selected disabled>Select a breed</option>
+                        <option value="Bengal">Bengal</option>
+                        <option value="Siamese">Siamese</option>
+                        <option value="Persian">Persian</option>
+                    </select>
+                </div>
+
+                <!--                <div class="input-group mb-3">-->
+                <!--                    <input type="text" class="form-control" placeholder="Cat Breeds" aria-label="cat-breeds">-->
+                <!--                </div>-->
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+        <div class="right">
+            <h3 style="font-family: 'Montserrat', sans-serif; font-weight: bold; margin-bottom: 24px;">Cat List</h3>
+            <div id="shownCat">
+                <div id="msg" style="color: red"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    let catData = [];
+    const catNameInput = document.querySelector('input[aria-label="cat-name"]');
+    const catAgeInput = document.querySelector('input[aria-label="cat-age"]');
+    const catBreedInput = document.querySelector('select[aria-label="cat-breeds"]');
+
+    let msg = document.getElementById("msg");
+
+    // Load cat data from local storage
+    if (localStorage.getItem('catData')) {
+        catData = JSON.parse(localStorage.getItem('catData'));
+        displayCatList();
+    }
+
+    const submitButton = document.querySelector('button.btn-primary');
+    submitButton.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        const catName = catNameInput.value;
+        const catAge = catAgeInput.value;
+        const catBreed = catBreedInput.value;
+
+        if (!catName || !catAge || !catBreed) {
+            // Display tooltip indicating null data
+            msg.textContent = 'Please fill in all fields';
+            return;
+        }
+
+        const newCat = {
+            name: catName,
+            age: catAge,
+            breed: catBreed
+        };
+
+        catData.push(newCat);
+        saveCatDataToLocalStorage(); // Save cat data to local storage
+
+        // Clear input fields
+        catNameInput.value = '';
+        catAgeInput.value = '';
+        catBreedInput.value = '';
+        msg.textContent = ''; // Clear error message
+
+        displayCat(newCat);
+    });
+
+    function saveCatDataToLocalStorage() {
+        localStorage.setItem('catData', JSON.stringify(catData));
+    }
+
+    function displayCat(cat) {
+        const catElement = document.createElement('div');
+        catElement.classList.add('cat-item');
+
+        const catNameElement = document.createElement('h3');
+        catNameElement.textContent = cat.name;
+        catElement.appendChild(catNameElement);
+
+        const catAgeElement = document.createElement('p');
+        catAgeElement.textContent = `${cat.breed} - ${cat.age} months old`;
+        catElement.appendChild(catAgeElement);
+
+        const editIcon = document.createElement('i');
+        editIcon.classList.add('fas', 'fa-edit');
+        editIcon.addEventListener('click', function () {
+            editCat(cat);
+        });
+        catElement.appendChild(editIcon);
+
+        const gapElement = document.createElement('span');
+        gapElement.style.marginRight = '16px';
+        catElement.appendChild(gapElement);
+
+        const deleteIcon = document.createElement('i');
+        deleteIcon.classList.add('fas', 'fa-trash-alt');
+        deleteIcon.addEventListener('click', function () {
+            deleteCat(cat);
+        });
+        catElement.appendChild(deleteIcon);
+
+        const shownCat = document.getElementById('shownCat');
+        shownCat.appendChild(catElement);
+    }
+
+    function displayCatList() {
+        const shownCat = document.getElementById('shownCat');
+        shownCat.innerHTML = ''; // Clear existing cat list
+
+        catData.forEach(function (cat) {
+            displayCat(cat);
+        });
+    }
+
+    function editCat(cat) {
+        const updatedName = prompt('Enter the updated cat name:', cat.name);
+        const updatedAge = prompt('Enter the updated cat age:', cat.age);
+        const updatedBreed = prompt('Please select cats breed:', cat.breed);
+        if (updatedName && updatedAge && updatedBreed) {
+            cat.name = updatedName;
+            cat.age = updatedAge;
+            cat.breed = updatedBreed;
+
+            saveCatDataToLocalStorage(); // Save cat data to local storage
+            displayCatList();
+        } else {
+            // Display tooltip indicating null data
+            msg.textContent = 'Please fill in all fields';
+        }
+    }
+
+    function updateCat() {
+        const updatedName = document.getElementById('editCatName').value;
+        const updatedAge = document.getElementById('editCatAge').value;
+        const updatedBreed = document.getElementById('editCatBreed').value;
+
+        if (updatedName && updatedAge && updatedBreed) {
+            const cat = {
+                name: updatedName,
+                age: updatedAge,
+                breed: updatedBreed
+            };
+
+            // Find the cat in the catData array and update its values
+            const index = catData.indexOf(cat);
+            if (index > -1) {
+                catData[index] = cat;
+                saveCatDataToLocalStorage(); // Save cat data to local storage
+                displayCatList();
+            }
+
+            // Hide the modal
+            $('#editCatModal').modal('hide');
+        } else {
+            // Display tooltip indicating null data
+            msg.textContent = 'Please fill in all fields';
+        }
+    }
+
+    function deleteCat(cat) {
+        const index = catData.indexOf(cat);
+        if (index > -1) {
+            catData.splice(index, 1);
+            saveCatDataToLocalStorage(); // Save cat data to local storage
+            displayCatList();
+        }
+    }
+
+
+</script>
 </body>
 </html>
