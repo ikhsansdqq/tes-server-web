@@ -3,9 +3,7 @@ const catNameInput = document.querySelector('input[aria-label="cat-name"]');
 const catAgeInput = document.querySelector('input[aria-label="cat-age"]');
 const catBreedInput = document.querySelector('select[aria-label="cat-breeds"]');
 const searchInput = document.querySelector('.form-control'); // Move the declaration here
-
 let msg = document.getElementById("msg");
-
 // Load cat data from local storage
 if (localStorage.getItem('catData')) {
     catData = JSON.parse(localStorage.getItem('catData'));

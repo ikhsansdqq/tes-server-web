@@ -15,7 +15,6 @@ def handle_client(client_socket):
         filename = "/index.html"
     elif filename == "/info":
         filename = "/ipsum.html"
-
     try:
         fin = open('web' + filename, encoding='ISO-8859-1')
         content = fin.read()
