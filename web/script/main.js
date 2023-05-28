@@ -2,6 +2,7 @@ let catData = [];
 const catNameInput = document.querySelector('input[aria-label="cat-name"]');
 const catAgeInput = document.querySelector('input[aria-label="cat-age"]');
 const catBreedInput = document.querySelector('select[aria-label="cat-breeds"]');
+const searchInput = document.querySelector('.form-control'); // Move the declaration here
 
 let msg = document.getElementById("msg");
 
@@ -11,7 +12,6 @@ if (localStorage.getItem('catData')) {
     displayCatList();
 }
 const searchForm = document.querySelector('.form-inline');
-const searchInput = document.querySelector('.form-control');
 
 searchForm.addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent form submission
@@ -56,10 +56,10 @@ submitButton.addEventListener('click', function (event) {
     msg.textContent = ''; // Clear error message
 
     displayCatList()
-    // displayCat(newCat);
 });
 
 function saveCatDataToLocalStorage() {
+    let searchBox = document.getElementById('searchBox');
     const filteredCats = searchBox.value ? catData.filter(function (cat) {
         return cat.name.toLowerCase().includes(searchBox.value.toLowerCase());
     }) : null;
@@ -175,3 +175,7 @@ clearCookiesButton.addEventListener('click', function () {
     // Clear the displayed cat list
     displayCatList();
 });
+
+function myModal() {
+    console.log('What is this')
+}

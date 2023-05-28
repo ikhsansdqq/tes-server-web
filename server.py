@@ -17,7 +17,7 @@ def handle_client(client_socket):
         filename = "/ipsum.html"
 
     try:
-        fin = open('web' + filename)
+        fin = open('web' + filename, encoding='ISO-8859-1')
         content = fin.read()
         response = 'HTTP/1.1 200 OK\r\n\r\n' + content
         client_socket.sendall(response.encode())
