@@ -1,7 +1,7 @@
 import socket
 import threading
 
-import markdown
+import markdown as markdown
 
 server_host = 'localhost'
 
