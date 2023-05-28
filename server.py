@@ -1,7 +1,11 @@
 import socket
 import threading
 
+import markdown
+
 server_host = 'localhost'
+
+
 # adding localhost as the server host name
 
 
@@ -26,12 +30,31 @@ def handle_client(client_socket):
         filename = "/ipsum.html"
     # makes the info URL into ipsum.html
 
-    try:
-        fin = open('web' + filename)
-        # makes a variable that opens up a web page with a specific URL
+    elif filename == "/readme":
+        try:
+            with open('README.md', 'r') as fin:
+                content = fin.read()
 
-        content = fin.read()
-        # makes content variable that shows the content using .read() method
+            html_content = markdown.markdown(content)
+
+            response = 'HTTP/1.1 200 OK\r\Content-Type: text/html\r\n\r\n' + html_content
+
+            client_socket.sendall(response.encode())
+            client_socket.close()
+            return
+        except FileNotFoundError:
+            with open('web/404.html') as fin:
+                content = fin.read()
+                # makes a variable that opens up a web page with a specific URL
+
+            response = 'HTTP/1.1 404 NOT FOUND\r\n\r\n' + content
+            # response http/1.1 400 not found and display the content
+            client_socket.sendall(response.encode())
+            print('HTTP/1.1 404 Not Found\r\n')
+
+    try:
+        with open('web' + filename) as fin:
+            content = fin.read()
 
         response = 'HTTP/1.1 200 OK\r\n\r\n' + content
         # response http/1.1 200 ok and display the content
@@ -42,11 +65,9 @@ def handle_client(client_socket):
         # print http/1.1 200 ok
 
     except FileNotFoundError:
-        fin = open('web/404.html')
-        # makes a variable that opens up a web page with a specific URL
-
-        content = fin.read()
-        # makes content variable that shows the content using .read() method
+        with open('web/404.html') as fin:
+            content = fin.read()
+            # makes a variable that opens up a web page with a specific URL
 
         response = 'HTTP/1.1 404 NOT FOUND\r\n\r\n' + content
         # response http/1.1 400 not found and display the content
