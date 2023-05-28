@@ -10,6 +10,7 @@ if (localStorage.getItem('catData')) {
     catData = JSON.parse(localStorage.getItem('catData'));
     displayCatList();
 }
+
 const searchForm = document.querySelector('.form-inline');
 const searchInput = document.querySelector('.form-control');
 
@@ -24,7 +25,6 @@ searchForm.addEventListener('submit', function (event) {
 
     searchInput.blur(); // Remove focus from the search input field
 });
-
 
 const submitButton = document.querySelector('button.btn-primary');
 submitButton.addEventListener('click', function (event) {
@@ -55,15 +55,13 @@ submitButton.addEventListener('click', function (event) {
     catBreedInput.value = '';
     msg.textContent = ''; // Clear error message
 
-    displayCatList()
-    // displayCat(newCat);
+    displayCatList();
 });
 
 function saveCatDataToLocalStorage() {
     const filteredCats = searchBox.value ? catData.filter(function (cat) {
         return cat.name.toLowerCase().includes(searchBox.value.toLowerCase());
     }) : null;
-
     localStorage.setItem('catData', JSON.stringify(filteredCats || catData));
 }
 
