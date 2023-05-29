@@ -71,3 +71,26 @@ i {
     display: inline-block;
     margin-right: 24px;
 }
+
+/* Styles for screens smaller than 480px */
+@media (max-width: 480px) {
+    .container {
+        display: inline;
+    }
+
+    .container h3{
+        font-size: 20px;
+    }
+
+    .left {
+        margin-top: 12px;
+    }
+
+    .right {
+        margin-top: 32px;
+    }
+
+    .cat-item {
+        margin-bottom: 12px;
+    }
+}

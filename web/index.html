@@ -11,31 +11,31 @@
 </head>
 <body>
 <!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#">Hidden brand</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchBox">Search</button>
+        </form>
+    </div>
+</nav>
 <div class="wrapper">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="#">Hidden brand</a>
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchBox">Search</button>
-            </form>
-        </div>
-    </nav>
     <div class="container">
         <div class="left">
             <h3 style="font-family: 'Montserrat', sans-serif; font-weight: bold; margin-bottom: 24px;">Cat Form</h3>
@@ -68,6 +68,50 @@
                 <div class="btn-grouping" style="display: flex; gap: 12px">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="submit" class="btn btn-outline-primary" id="clearCookies">Clear Cookies</button>
+
+                    <!-- Button to trigger the modal -->
+<!--                    <button class="btn btn-primary" data-toggle="modal" data-target="#editCatModal">Edit Cat</button>-->
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="editCatModal" tabindex="-1" role="dialog"
+                         aria-labelledby="editCatModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editCatModalLabel">Edit Cat</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="editCatForm">
+                                        <div class="form-group">
+                                            <label for="catName">Cat Name</label>
+                                            <input type="text" class="form-control" id="catName"
+                                                   placeholder="Enter cat name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="catAge">Cat Age</label>
+                                            <input type="text" class="form-control" id="catAge"
+                                                   placeholder="Enter cat age">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="catBreed">Cat Breed</label>
+                                            <input type="text" class="form-control" id="catBreed"
+                                                   placeholder="Enter cat breed">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="saveCatChanges">Save changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -84,5 +128,14 @@
 </div>
 
 <script src="script/main.js"></script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 </body>
 </html>

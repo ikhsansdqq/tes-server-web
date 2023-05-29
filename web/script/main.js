@@ -128,21 +128,56 @@ function displayCatList(filteredCats) {
 
 
 function editCat(cat) {
-    const updatedName = prompt('Enter the updated cat name:', cat.name);
-    const updatedAge = prompt('Enter the updated cat age:', cat.age);
-    const updatedBreed = prompt('Please select cats breed:', cat.breed);
-    if (updatedName && updatedAge && updatedBreed) {
-        cat.name = updatedName;
-        cat.age = updatedAge;
-        cat.breed = updatedBreed;
+    const catNameInput = document.getElementById('catName');
+    const catAgeInput = document.getElementById('catAge');
+    const catBreedInput = document.getElementById('catBreed');
 
-        saveCatDataToLocalStorage(); // Save cat data to local storage
-        displayCatList();
-    } else {
-        // Display tooltip indicating null data
-        msg.textContent = 'Please fill in all fields';
-    }
+    catNameInput.value = cat.name;
+    catAgeInput.value = cat.age;
+    catBreedInput.value = cat.breed;
+
+    const saveChangesButton = document.getElementById('saveCatChanges');
+
+    saveChangesButton.addEventListener('click', function () {
+        const updatedName = catNameInput.value;
+        const updatedAge = catAgeInput.value;
+        const updatedBreed = catBreedInput.value;
+
+        if (updatedName && updatedAge && updatedBreed) {
+            cat.name = updatedName;
+            cat.age = updatedAge;
+            cat.breed = updatedBreed;
+
+            saveCatDataToLocalStorage();
+            displayCatList();
+
+            showSuccessMessage();
+            $('#editCatModal').modal('hide'); // Hide the modal
+        } else {
+            const msg = document.getElementById('msg');
+            msg.textContent = 'Please fill in all fields';
+        }
+    });
+
+    $('#editCatModal').modal('show'); // Show the modal
 }
+
+// Function to show success message
+// Function to show success message
+function showSuccessMessage() {
+    const successMessage = document.createElement('div');
+    successMessage.classList.add('alert', 'alert-success');
+    successMessage.textContent = 'Cat data successfully updated';
+
+    const modalBody = document.querySelector('.modal-body');
+    modalBody.appendChild(successMessage);
+
+    // Remove the success message after 3 seconds
+    setTimeout(function () {
+        modalBody.removeChild(successMessage);
+    }, 3000);
+}
+
 
 function deleteCat(cat) {
     const index = catData.indexOf(cat);
