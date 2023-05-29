@@ -6,10 +6,12 @@ const catBreedInput = document.querySelector('select[aria-label="cat-breeds"]');
 let msg = document.getElementById("msg");
 
 // Load cat data from local storage
-if (localStorage.getItem('catData')) {
-    catData = JSON.parse(localStorage.getItem('catData'));
-    displayCatList();
-}
+document.addEventListener('DOMContentLoaded', function () {
+    if (localStorage.getItem('catData')) {
+        catData = JSON.parse(localStorage.getItem('catData'));
+        displayCatList();
+    }
+});
 
 const searchForm = document.querySelector('.form-inline');
 const searchInput = document.querySelector('.form-control');

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A CRUD Form">
     <title>Landing Page Cat Data</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
@@ -70,7 +71,7 @@
                     <button type="submit" class="btn btn-outline-primary" id="clearCookies">Clear Cookies</button>
 
                     <!-- Button to trigger the modal -->
-<!--                    <button class="btn btn-primary" data-toggle="modal" data-target="#editCatModal">Edit Cat</button>-->
+                    <!--                    <button class="btn btn-primary" data-toggle="modal" data-target="#editCatModal">Edit Cat</button>-->
 
                     <!-- Modal -->
                     <div class="modal fade" id="editCatModal" tabindex="-1" role="dialog"
@@ -92,14 +93,21 @@
                                                    placeholder="Enter cat name">
                                         </div>
                                         <div class="form-group">
-                                            <label for="catAge">Cat Age</label>
-                                            <input type="text" class="form-control" id="catAge"
-                                                   placeholder="Enter cat age">
+                                            <label for="cat-age">Cat
+                                                Age</label>
+                                            <input id="catAge" type="number" class="form-control" min="1"
+                                                   placeholder="Cat Age"
+                                                   aria-label="cat-age">
+                                            <small class="form-text text-muted">Please provide your cat age in <strong>month.</strong></small>
                                         </div>
                                         <div class="form-group">
-                                            <label for="catBreed">Cat Breed</label>
-                                            <input type="text" class="form-control" id="catBreed"
-                                                   placeholder="Enter cat breed">
+                                            <label for="cat-breeds">Cat Breed</label>
+                                            <select id="catBreed" class="form-control" aria-label="cat-breeds">
+                                                <option value="" selected disabled>Select a breed</option>
+                                                <option value="Bengal">Bengal</option>
+                                                <option value="Siamese">Siamese</option>
+                                                <option value="Persian">Persian</option>
+                                            </select>
                                         </div>
                                     </form>
                                 </div>
