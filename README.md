@@ -60,9 +60,12 @@ its functionality:
 
 ## Contributors
 
-The TCP Web Server project was developed by [**Ikhsan Assidiqie**](https://github.com/ikhsansdqq), [**Fizio Ramadhan
-Herman**](https://github.com/fiziorh) and **Dawwi Raissa Damarjati Muljana**. This project was created as part of the
-final assignment for the Computer Network lecture at Telkom University in 2023.
+The TCP Web Server project was developed by:
+- [**Ikhsan Assidiqie**](https://github.com/ikhsansdqq); Responsible for developing server-side code, troubleshooting web servers, and managing web programming.
+- [**Fizio Ramadhan Herman**](https://github.com/fiziorh); Inserting comments within the server-side Python file.
+- **Dawwi Raissa Damarjati Muljana**; Accountable for overseeing documentation processes, generating document requirements, and crafting specifications.
+
+This project was created as part of the final assignment for the Computer Network lecture at Telkom University in 2023.
 
 ## License
 
